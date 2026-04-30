@@ -1,4 +1,6 @@
 /* Main entry file for CSS */
 
+@import "./varaiables.css";
 @import "./components/index.css";
 @import "./popup.css";
+@import "./core.css";

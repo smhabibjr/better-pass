@@ -1,5 +1,5 @@
 #popup-page {
-  height: 350px;
+  height: var(--popup-height);
   width: 550px;
 }
 
