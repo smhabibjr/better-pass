@@ -1,4 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import { setSessionStorage, clearSessionStorage } from "../services/storage_service";
 
 class AuthController extends Controller {
   static targets = [ "flash", "email", "password" ]
@@ -21,7 +22,7 @@ class AuthController extends Controller {
 
       if (data.token) {
         //localStorage.setItem("authToken", data.token);
-        console.log(data.token);
+        setSessionStorage(({ token: data.token }));
         Turbo.visit('/frames/entries.html', { frame: 'app' });
         
       } 
