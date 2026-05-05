@@ -38,6 +38,11 @@ class AuthController extends Controller {
       this.flashTarget.textContent = "An unexpected error occurred.";
     }
   }
+
+  async signOut() {
+    await clearSessionStorage("token");
+    Turbo.visit('/frames/signin.html', { frame: 'app' });
+  }
 }
 
 export default AuthController;
