@@ -4,6 +4,10 @@ import { setSessionStorage, clearSessionStorage } from "../services/storage_serv
 class AuthController extends Controller {
   static targets = [ "flash", "email", "password" ]
 
+  connect() {
+    document.addEventListener('auth:signOut', this.signOut.bind(this))
+  }
+
   async signIn(event) {
     try {
 
