@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 import { getSessionStorage } from "../services/storage_service";
 import fetchEntries from "../services/fetch_entries_service";
+import { sidebar, main } from "../templates/entries_templates";
 
 
 class EntriesController extends Controller {
@@ -17,13 +18,20 @@ class EntriesController extends Controller {
 
         const entries = await fetchEntries()
         console.log(entries)
+
+        try {
+            this.sidebarTarget.innerHTML = sidebar(entries)
+            this.mainTarget.innerHTML = main(entries[0])
+        } catch (error) {
+            console.error("Error rendering entries:", error);
+        }
     }
 
-     toggleSidebar() {
-        this.sidebarTarget.classList.toggle("hidden");
-        this.mainTarget.classList.toggle("w-full");
-        this.mainTarget.classList.toggle("w-3/4");
-     }
+
+    updateMain({ params}) {
+        const entry = event.currentTarget.dataset.entriesEntryParam
+        this.mainTarget.innerHTML = main(params.entry);
+    }
 
 
 }
