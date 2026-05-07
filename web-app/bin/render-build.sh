@@ -15,5 +15,5 @@ yarn build:css
 # Precompile Rails assets
 bundle exec rails assets:precompile
 
-# Run database migrations
-bundle exec rails db:migrate
+# NOTE: db:migrate runs as Render's Pre-Deploy Command, not here.
+# Build time-এ database connection থাকে না।
