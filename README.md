@@ -9,16 +9,18 @@
 
 ### Rails web app
 ```bash
-cd web-app
+git clone https://github.com/smhabibjr/better-pass.git
+cd better-pass/web-app
 bundle install
-rails server
+yarn install
+bin/dev or rails server
 ```
 
 ### Chrome extension
 ```bash
-cd chrome-extension
+cd better-pass/chrome-extension
 yarn install
-yarn build
+yarn start
 ```
 
 ## Deployment
