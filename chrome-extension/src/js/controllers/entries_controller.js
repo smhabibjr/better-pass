@@ -25,6 +25,29 @@ class EntriesController extends Controller {
         } catch (error) {
             console.error("Error rendering entries:", error);
         }
+
+       const [activeTab] = await chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        })
+        
+        if (!activeTab) {
+            return
+        }
+
+        let parsedUrl;
+        try {
+            parsedUrl = new URL(activeTab.url)
+        } catch(error) {
+            console.error('Invalid URL in activeTab: ', error)
+        }
+
+        const activeEntry = entries.find(entry => entry.url.includes(parsedUrl.hostname))
+
+        if (activeEntry) {
+            this.mainTarget.innerHTML = main(activeEntry)
+        }
+
     }
 
 
@@ -32,6 +55,12 @@ class EntriesController extends Controller {
         const entry = event.currentTarget.dataset.entriesEntryParam
         this.mainTarget.innerHTML = main(params.entry);
     }
+
+    navigateToLogin({ params }) {
+        chrome.tabs.create({url: params.entry.url})
+    }
+
+
 
 
 }
