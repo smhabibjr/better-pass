@@ -60,6 +60,33 @@ class EntriesController extends Controller {
         chrome.tabs.create({url: params.entry.url})
     }
 
+    async fillInCredentials({ params }) {
+        const [activeTab] = await chrome.tabs.query({
+        active: true,
+        currentWindow: true
+        })
+
+        if (!activeTab) {
+        return
+        }
+
+        let parsedUrl;
+        try {
+        parsedUrl = new URL(activeTab.url)
+        } catch(error) {
+        console.error('Invalid URL in activeTab: ', error)
+        }
+
+        const activeEntry = params.entry.url.includes(parsedUrl.hostname)
+
+        if (activeEntry) {
+        chrome.tabs.sendMessage(activeTab.id, {
+            username: params.entry.username,
+            password: params.entry.password
+        })
+        }
+    }
+
 
 
 
