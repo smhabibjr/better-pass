@@ -8,7 +8,6 @@ class SearchController extends Controller {
       this.clearButtonTarget.classList.remove('d-none')
     } else {
       this.clearButtonTarget.classList.add('d-none')
-      console.log(this.clearButtonTarget.classList);
     }
   }
 }

@@ -8,7 +8,6 @@ class EntriesController extends Controller {
     static targets = [ "sidebar", "main" ]
 
     async connect() {
-        console.log("Entries controller connected");
         const token = await getSessionStorage('token');
 
         if (!token) {
@@ -17,7 +16,6 @@ class EntriesController extends Controller {
         }
 
         const entries = await fetchEntries()
-        console.log(entries)
 
         try {
             this.sidebarTarget.innerHTML = sidebar(entries)
